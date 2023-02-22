@@ -1,0 +1,46 @@
+<poke-header *ngIf="!apiError"/>
+
+<main class="w-6 lg:w-4 m-auto">
+  <ng-template [ngIf]="!isLoading">
+    <section class="flex justify-content-end align-items-end relative h-5rem px-4">
+      <h1 class="fadeinright animation-duration-1000 capitalize text-4xl text-white">{{ pokemon[0].name }}</h1>
+      <h2 class="fadeinleft animation-duration-1000 absolute top-0 font-light text-6xl text-indigo-700">{{ pokemon[1].names[0].name }}</h2>
+    </section>
+  
+    <section class="relative">
+      <img 
+        [src]="pokemon[0].sprites.other.dream_world.front_default"
+        [alt]="pokemon[0].name" 
+        class="absolute w-7rem -mt-7 pl-4 fadeinup animation-duration-1000"
+      />
+  
+      <article class="bg-white border-round-3xl pt-8 px-5 h-25rem">
+        <section>
+          <h3 class="text-red-500 font-italic font-bold text-2xl underline">Estatísticas</h3>
+  
+          <ol class="list-none mt-3">
+            <li *ngFor="let value of pokemon[0].stats" class="flex justify-content-between capitalize mb-1">
+              {{ value.stat.name }}
+              
+              <strong>
+                {{ value.base_stat }}
+              </strong>
+            </li>
+          </ol>
+        </section>
+  
+        <section class="mt-7">
+          <a 
+            pButton
+            [routerLink]="['']" 
+            class="p-button-danger no-underline flex justify-content-center bg-red-500 hover:bg-red-700"
+          >
+            Voltar
+          </a>
+        </section>
+      </article>
+    </section>
+  </ng-template>
+
+  <img src="assets/error.svg" alt="erro" width="100%" *ngIf="apiError"/>
+</main>
